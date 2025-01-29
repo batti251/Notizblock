@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/standard.css">
+    <link rel="shortcut icon" href="#">
+    <title>Notizblock</title>
+</head>
+<body onload="renderNotes(), renderTrash(), renderArchive()">
+
+<main>
+    <section class="notes">
+        <h1>Notizblock</h1>
+
+            <div class="inputField">
+                <input type="text" id="NewNote"> 
+                <button id="addButton" onclick="addNewNote()">speichern</button>
+            </div>
+        <div id="content"></div>
+    </section>
+
+<section id="trash" class="d_none">
+<section class="subline">
+    <h2>Mülleimer</h2> <button onclick="deleteWholeTrash()">alles löschen</button></section>
+    <div id="trash-content"></div>
+</section>
+
+<section id="archive" class="d_none">
+    <section class="subline"><h2>Archiv</h2> <button onclick="deleteWholeArchive()">alles löschen</button></section>
+    <div id="archive-content"></div>
+</section>
+</main>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+#ToDo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 300px;
+    align-items: center;
+}
+
+.note{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 300px;
+
+}
+.inputField{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:300px;
+}
+
+#deleteButton{
+    display: flex;
+    justify-content: center;
+    height: 20px;
+
+}
+
+main{
+    display: flex;
+    justify-content: space-between;
+}
+
+#trash{
+}
+
+.archive{
+    display: block;
+}
+
+
+
+
+
+
+.subline{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:300px;
+}
