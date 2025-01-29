@@ -21,16 +21,18 @@
         <div id="content"></div>
     </section>
 
+<aside>
 <section id="trash" class="d_none">
 <section class="subline">
-    <h2>Mülleimer</h2> <button onclick="deleteWholeTrash()">alles löschen</button></section>
+    <h2>Mülleimer</h2> <button class="btn_deleteAll" onclick="deleteWholeTrash()">alles löschen</button></section>
     <div id="trash-content"></div>
 </section>
 
 <section id="archive" class="d_none">
-    <section class="subline"><h2>Archiv</h2> <button onclick="deleteWholeArchive()">alles löschen</button></section>
+    <section class="subline"><h2>Archiv</h2> <button class="btn_deleteAll" onclick="deleteWholeArchive()">alles löschen</button></section>
     <div id="archive-content"></div>
 </section>
+</aside>
 </main>
 
 <script src="script.js"></script>

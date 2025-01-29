@@ -45,21 +45,23 @@ function renderTrash() {
 }
 
 function getNoteTemplate(indexNotes) {
-    return `<div class="note"><p> + ${notes[indexNotes]} </p> <button id="deleteButton" onclick="toTrash(${indexNotes})">löschen</button></div>`;
+    return `<div class="note" id="notes"> <button id="deleteButton" onclick="toTrash(${indexNotes})" >X</button> <p ${indexNotes} ondblclick="editNote(${indexNotes})"> ${notes[indexNotes]} </p> </div>`;
 }
 
 function getTrashNoteTemplate(indexTrashNotes) {
-    return `<div class="note"><p> + ${trash[indexTrashNotes]} </p> 
-            <button id="deleteButton" onclick="toArchive(${indexTrashNotes})">löschen</button>
-            <button id="rewindButton" onclick ="backToNotes(${indexTrashNotes})"> wiederherstellen </button></div>`;
+    return `<div class="note"> 
+            <button id="deleteButton" onclick="toArchive(${indexTrashNotes})">X</button>
+            <button id="rewindTrashButton" onclick ="backToNotes(${indexTrashNotes})"><</button><p> ${trash[indexTrashNotes]} </p> 
+            </div>`;
     
         
 }
 
 function getArchiveNoteTemplate(indexArchiveNotes) {
-    return `<div class="note"><p> + ${archive[indexArchiveNotes]} </p>
-     <button id="deleteButton" onclick="deleteArchive(${indexArchiveNotes})">  löschen </button>
-     <button id="rewindButton" onclick ="backToTrash(${indexArchiveNotes})"> in Mülleimer </button> </div>`;
+    return `<div class="note">
+            <button id="deleteButton" onclick="deleteArchive(${indexArchiveNotes})">X</button>
+            <button id="rewindArchiveButton" onclick ="backToTrash(${indexArchiveNotes})">V</button> <p> ${archive[indexArchiveNotes]} </p>
+            </div>`;
 }
 
 
@@ -228,4 +230,22 @@ function deleteWholeArchive(indexArchiveNotes){
 
 
 
+function editNote(indexNotes) {
+let renderNotesRef = document.getElementById('notes')
+       renderNotesRef.innerHTML = "";
+   for (let index = 0; index < notes.length; index++) {
+        if (index == indexNotes) {renderNotesRef.innerHTML = getEditNoteTemplate(indexNotes)  }
+       }
+}
 
+
+function getEditNoteTemplate(indexNotes) {
+   return `<div class="note" id="notes"><input value="${notes[indexNotes]}"></div>`;
+}
+
+//Notiz bearbeiten
+//ondoubleclick 
+    //Notiz als input ausgeben
+    //input zieht als Value die entsprechende Notiz
+    //mit speichern/enter wird die Notiz gespeichert
+    //Notiz wird im LocalStore gespeichert / neu geladen
