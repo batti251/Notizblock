@@ -186,31 +186,29 @@ function deleteArchive(indexArchiveNotes) {
 }
 
 
-//function deleteWholeTrash(indexTrashNotes){
-//    for (let trashIndex = 0; trashIndex < trash.length; trashIndex++) {
-//        archive.push(trash[indexTrashNotes])
-//        trash.splice(indexTrashNotes)
-//        removeTrashFromLocalStorage(indexTrashNotes)
-//        saveArchiveToLocalStorage();
-//        renderTrash();
-//        renderArchive();
-//    }
-//}
-//
-function deleteWholeTrash(){
-    console.log(trash);
-    for (let index = 0; index < trash.length; index++) {
-        let element = trash[index];
+function deleteWholeTrash(indexTrashNotes){
+      for (let i = 0; i < trash.length; i++) {
+        archive.push(trash[i])
+    }  
+        trash.splice(indexTrashNotes)
+        localStorage.removeItem("trash",JSON.stringify(trash))
+        saveArchiveToLocalStorage();
+        renderTrash();
+        renderArchive();
+}
 
-        archive.push(element);
-        trash.splice(element);
-    //   removeTrashFromLocalStorage();
-    //    saveArchiveToLocalStorage();
+//
+
+function toArchive(indexTrashNotes) {
+    archive.push(trash[indexTrashNotes])
+    trash.splice(indexTrashNotes,1)
+    localStorage.removeItem("trash",JSON.stringify(trash))
+    saveArchiveToLocalStorage();
     renderTrash();
     renderArchive();
-    }    
-
 }
+
+//
 
 function deleteWholeArchive(indexArchiveNotes){
     archive.splice(indexArchiveNotes)
