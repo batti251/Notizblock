@@ -46,8 +46,6 @@ aside{
     gap: 80px;
 }
 
-#trash{
-}
 
 .archive{
     display: block;
@@ -65,10 +63,24 @@ aside{
 font-weight: bold;
 }
 
-
 .subline{
     display: flex;
     flex-direction: column-reverse;
     width: 100px;
+}
 
+img{
+    height: 20px;
+    background-color: green;
+    border-radius: 20px;
+}
+
+.btnIcon{
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.btnIcon:hover{
+    background-color: aqua;
+    cursor: pointer;
 }

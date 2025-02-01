@@ -2,6 +2,7 @@ let notes = []
 let trash = []
 let archive = []
 let input = document.getElementById('NewNote');
+let inputt = document.getElementById('editNote');
 
 function renderNotes() {
     getNotesFromLocalStorage();
@@ -20,8 +21,7 @@ function renderTrash() {
         let display = document.getElementById("trash");
         display.classList.add('d_none')}
         else   {display.classList.remove('d_none')};
-   
-    let renderTrashNotesRef = document.getElementById('trash-content')
+     let renderTrashNotesRef = document.getElementById('trash-content')
         renderTrashNotesRef.innerHTML = "";
     for (let indexTrashNotes = 0; indexTrashNotes < trash.length; indexTrashNotes++) {
         renderTrashNotesRef.innerHTML += getTrashNoteTemplate(indexTrashNotes)  
@@ -110,7 +110,7 @@ function getArchiveFromLocalStorage() {
 function toTrash(indexNotes) {
     trash.push(notes[indexNotes])
     notes.splice(indexNotes,1)
-localStorage.removeItem("notes",JSON.stringify(notes))
+    localStorage.removeItem("notes",JSON.stringify(notes))
     saveTrashToLocalStorage();
     renderNotes();
     renderTrash();
@@ -149,15 +149,14 @@ function removeNotesFromLocalStorage() {
     localStorage.removeItem("notes",JSON.stringify(notes))
     saveNotesToLocalStorage();
     renderNotes();
-
- }
+}
 
 function removeTrashFromLocalStorage() {
     localStorage.removeItem("trash",JSON.stringify(trash))
     saveTrashToLocalStorage();
     renderNotes();
     renderTrash();
- }
+}
  
  
  function removeArchiveFromLocalStorage() {
@@ -166,7 +165,7 @@ function removeTrashFromLocalStorage() {
      renderNotes();
      renderTrash();
      renderArchive()
-  }
+}
 
 function deleteNotes(indexNotes) {
     notes.splice(indexNotes,1)
@@ -185,14 +184,6 @@ function deleteArchive(indexArchiveNotes) {
     removeArchiveFromLocalStorage(indexArchiveNotes)
     renderArchive();
 }
-
-
-input.addEventListener("keypress", function(event){
-    if (event.key === "Enter"){
-        event.preventDefault();
-        document.getElementById("addButton").click()
-    }
-})
 
 
 //function deleteWholeTrash(indexTrashNotes){
@@ -231,21 +222,56 @@ function deleteWholeArchive(indexArchiveNotes){
 
 
 function editNote(indexNotes) {
-let renderNotesRef = document.getElementById('notes')
-       renderNotesRef.innerHTML = "";
-   for (let index = 0; index < notes.length; index++) {
-        if (index == indexNotes) {renderNotesRef.innerHTML = getEditNoteTemplate(indexNotes)  }
-       }
+       let renderEditNotesRef = document.getElementsByClassName('note')
+    for (let index = 0; index < renderEditNotesRef.length; index++) {
+        const element = renderEditNotesRef[index];
+        if (index == indexNotes) {
+            element.innerHTML = getEditNoteTemplate(indexNotes)  
+            break;            
+        } 
+    }
+console.log(getElementById("editedSubmit"));
+
 }
 
 
 function getEditNoteTemplate(indexNotes) {
-   return `<div class="note" id="notes"><input value="${notes[indexNotes]}"></div>`;
+    return `<div class="note" id="notes"><input id="editNote" value="${notes[indexNotes]}"> <button id="editedSubmit" class="btnIcon" onclick="saveEditNote(${indexNotes})"><img src="assets/check_icon.png" alt="check_icon"></button></div>`;
 }
 
-//Notiz bearbeiten
-//ondoubleclick 
-    //Notiz als input ausgeben
-    //input zieht als Value die entsprechende Notiz
-    //mit speichern/enter wird die Notiz gespeichert
-    //Notiz wird im LocalStore gespeichert / neu geladen
+function saveEditNote(indexNotes) {
+    let editedNoteRef = document.getElementById('editNote');
+    let editedNote = editedNoteRef.value; 
+    const findIndexNote = notes.indexOf(notes[indexNotes])
+    const findEditedNoteValue = editedNoteRef.value
+
+    if (editedNote != "") {
+    editedNote = notes.with(findIndexNote,editedNote)
+    notes.splice(findIndexNote,1,findEditedNoteValue)
+    saveNotesToLocalStorage()
+    renderNotes()
+    }
+}
+
+
+
+
+
+    input.addEventListener("keypress", function(event){
+        if (event.key === "Enter"){
+            event.preventDefault();
+            document.getElementById("submit").click()
+        }
+    })
+    
+    document.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            let editNoteRef = document.getElementById("editNote");
+            if (document.activeElement === editNoteRef) { 
+                event.preventDefault();
+                document.getElementById("editedSubmit").click();
+            }
+        }
+    });
+    
+    
